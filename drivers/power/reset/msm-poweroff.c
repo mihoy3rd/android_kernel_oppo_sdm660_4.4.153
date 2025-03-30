@@ -367,17 +367,6 @@ static void msm_restart_prepare(const char *cmd)
 		qpnp_pon_system_pwr_off(PON_POWER_OFF_HARD_RESET);
 	}
 
-	/* Debug */
-	qpnp_pon_set_restart_reason(
-		PON_RESTART_REASON_RECOVERY);
-	__raw_writel(0x77665502, restart_reason);
-	flush_cache_all();
-	/*outer_flush_all is not supported by 64bit kernel*/
-#ifndef CONFIG_ARM64
-	outer_flush_all();
-#endif
-	return;
-
 #ifndef VENDOR_EDIT
 /* OPPO 2013.07.09 hewei modify begin for restart mode*/
 	if (cmd != NULL) {
